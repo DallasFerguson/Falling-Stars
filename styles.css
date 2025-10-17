@@ -145,10 +145,45 @@ button:active {
     margin: 0 auto 20px;
 }
 
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
 #score {
     font-size: 28px;
     color: #ffd700;
     font-weight: bold;
+}
+
+#highScore {
+    font-size: 18px;
+    color: #ffd700;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+#newHighScore {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffd700;
+    font-size: 24px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
 }
 
 #lives {
@@ -187,7 +222,7 @@ button:active {
 
 #finalScore {
     font-size: 32px;
-    margin: 20px 0;
+    margin: 20px 0 10px;
     color: #b8b8ff;
 }
 

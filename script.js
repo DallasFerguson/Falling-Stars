@@ -19,11 +19,25 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 let score = 0;
+let highScore = 0;
 let lives = 3;
 let gameActive = false;
 let stars = [];
 let particles = [];
 let difficulty = 1;
+let isNewHighScore = false;
+
+// Try to load the high score from localStorage
+try {
+    const savedHighScore = localStorage.getItem('starCatcherHighScore');
+    if (savedHighScore) {
+        highScore = parseInt(savedHighScore, 10);
+        document.getElementById('highScore').textContent = 'High Score: ' + highScore;
+    }
+} catch (e) {
+    console.log('localStorage not available:', e);
+    // Continue without high score functionality
+}
 
 let basket = {
     x: canvas.width / 2 - 40,
@@ -49,14 +63,17 @@ document.addEventListener('keyup', (e) => keys[e.key] = false);
 function startGame() {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('gameScreen').style.display = 'block';
+    document.getElementById('newHighScore').style.display = 'none';
     score = 0;
     lives = 3;
     difficulty = 1;
     stars = [];
     particles = [];
+    isNewHighScore = false;
     gameActive = true;
     basket.x = canvas.width / 2 - 40;
     updateScore();
+    updateHighScore();
     updateLives();
     gameLoop();
 }
@@ -135,6 +152,38 @@ function drawStar(x, y, size, rotation) {
 
 function updateScore() {
     document.getElementById('score').textContent = 'Score: ' + score;
+    
+    // Check for new high score
+    if (score > highScore) {
+        highScore = score;
+        updateHighScore();
+        
+        if (!isNewHighScore && score > 0) {
+            showNewHighScore();
+        }
+    }
+}
+
+function updateHighScore() {
+    document.getElementById('highScore').textContent = 'High Score: ' + highScore;
+    
+    // Save high score to localStorage
+    try {
+        localStorage.setItem('starCatcherHighScore', highScore);
+    } catch (e) {
+        console.log('localStorage not available:', e);
+    }
+}
+
+function showNewHighScore() {
+    isNewHighScore = true;
+    const newHighScoreEl = document.getElementById('newHighScore');
+    newHighScoreEl.style.display = 'block';
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+        newHighScoreEl.style.display = 'none';
+    }, 3000);
 }
 
 function updateLives() {
@@ -231,6 +280,17 @@ function gameLoop() {
 
 function endGame() {
     document.getElementById('finalScore').textContent = 'Your Score: ' + score;
+    
+    // Display high score info
+    const finalHighScoreEl = document.getElementById('finalHighScore');
+    if (isNewHighScore) {
+        finalHighScoreEl.textContent = 'New High Score: ' + highScore + ' 🏆';
+        finalHighScoreEl.style.color = '#ffd700';
+    } else {
+        finalHighScoreEl.textContent = 'High Score: ' + highScore;
+        finalHighScoreEl.style.color = '#b8b8ff';
+    }
+    
     document.getElementById('gameOver').style.display = 'block';
 }
 
