@@ -11,7 +11,8 @@ Star Catcher is a simple yet engaging JavaScript game where players control a ba
 - Visually appealing cosmic theme with gradient backgrounds and twinkling stars
 - Simple, intuitive controls (mouse, arrow keys, or A/D keys)
 - Progressive difficulty system
-- Score tracking and lives system
+- Score tracking and high score system that persists between game sessions
+- Lives system
 - Particle effects when stars are caught
 - Responsive design with animated UI elements
 
@@ -39,7 +40,3 @@ Star Catcher is a simple yet engaging JavaScript game where players control a ba
 ## Dependencies
 
 No external libraries required! The game runs on pure JavaScript, HTML, and CSS.
-
-## Credits
-
-Originally created by Dallas Ferguson
