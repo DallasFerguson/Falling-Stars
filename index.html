@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Stars</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-bg" id="starsBg"></div>
+    
+    <div id="gameContainer">
+        <div id="startScreen">
+            <h1 class="float-animation">⭐ STAR CATCHER ⭐</h1>
+            <p class="subtitle">Catch falling stars and test your reflexes!</p>
+            
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>🌟 Move your basket to catch the falling stars</p>
+                <p>⚡ Each star you catch is worth 10 points</p>
+                <p>❤️ You have 3 lives - don't miss too many stars!</p>
+                <p>🚀 The game gets faster as you score more points</p>
+                
+                <div class="control-icons">
+                    <div class="control-item">🖱️ Mouse</div>
+                    <div class="control-item">⬅️ ➡️ Arrows</div>
+                    <div class="control-item">A / D Keys</div>
+                </div>
+            </div>
+            
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <div id="gameScreen">
+            <div id="scoreDisplay">
+                <div id="score">Score: 0</div>
+                <div id="lives">
+                    <span class="heart">♥</span>
+                    <span class="heart">♥</span>
+                    <span class="heart">♥</span>
+                </div>
+            </div>
+            <canvas id="gameCanvas" width="600" height="500"></canvas>
+            
+            <div id="gameOver">
+                <h2>Game Over!</h2>
+                <p id="finalScore"></p>
+                <div class="button-group">
+                    <button onclick="restartGame()">Play Again</button>
+                    <button class="secondary-btn" onclick="backToMenu()">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
